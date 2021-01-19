@@ -88,6 +88,7 @@ function makePersist(element, insertionMethod, referenceElement) {
 }
 
 function isInHTML(id) {
+  if(!id) return
   if (document.querySelector(`#${id}`)) {
     return true;
   } else {
