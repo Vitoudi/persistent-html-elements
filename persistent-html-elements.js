@@ -48,6 +48,10 @@ function checkForPersistentElements() {
     }
 }
 
+function testLib() {
+  console.log('success')
+}
+
 function avoidPersistence(id) {
     console.log(Array.isArray(id))
     localStorage.setItem('avoid', id)
