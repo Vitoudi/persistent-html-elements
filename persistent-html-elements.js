@@ -1,11 +1,11 @@
 function checkForPersistentElements() {
-    if(localStorage.length) {
+    if(sessionStorage.length) {
         const elements = []
-        Object.keys(localStorage).forEach(item => {
+        Object.keys(sessionStorage).forEach(item => {
             console.log(item);
             if (!item.startsWith("my")) return;
 
-            const elementObj = JSON.parse(localStorage.getItem(item));
+            const elementObj = JSON.parse(sessionStorage.getItem(item));
             const element = elementObj.element;
 
             const id = element
@@ -15,7 +15,7 @@ function checkForPersistentElements() {
 
             if (isInHTML(id)) return;
 
-            if(localStorage.getItem('avoid') === id) return
+            if(sessionStorage.getItem('avoid') === id) return
 
             elements.push(element);
             printElement(elementObj);
@@ -54,7 +54,7 @@ function testLib() {
 
 function avoidPersistence(id) {
     console.log(Array.isArray(id))
-    localStorage.setItem('avoid', id)
+    sessionStorage.setItem('avoid', id)
 }
 
 function makePersist(element, insertionMethod, referenceElement) {
@@ -75,15 +75,15 @@ function makePersist(element, insertionMethod, referenceElement) {
           element.id
         }" class="${element.classList}">${content}</${tag.toLowerCase()}>`;
 
-        putElementInLocalStorage(element.id, JSON.stringify({
+        putElementInSessionStorage(element.id, JSON.stringify({
             element: persistentElement,
             mode: insertionMethod || 'default',
             referenceElement: referenceElement || 'body'
         }))
 
-    function putElementInLocalStorage(id, element) {
-        if(localStorage.getItem(id)) return
-        localStorage.setItem(id, element)
+    function putElementInSessionStorage(id, element) {
+        if(sessionStorage.getItem(id)) return
+        sessionStorage.setItem(id, element)
     } 
 }
 
